@@ -2,18 +2,20 @@
 
 10 well-known pre-trained object detectors are loaded and used in a standard and easy way.
 
-- YOLOF: You Only Look One-level Feature (2021)
-- YOLOX: Exceeding YOLO Series in 2021 (2021)
-- DETR: End-to-End Object Detection with Transformers (2020)
-- Deformable DETR: Deformable Transformers for End-to-End Object Detection (2021)
-- SparseR-CNN: End-to-End Object Detection with Learnable Proposals (2020)
-- VarifocalNet: An IoU-aware Dense Object Detector (2020)
-- PAA: Probabilistic Anchor Assignment with IoU Prediction for Object Detection (2020)
-- SABL: Side-Aware Boundary Localization for More Precise Object Detection (2020)
-- ATSS: Bridging the Gap Between Anchor-based and Anchor-free Detection via Adaptive Training Sample Selection (2019)
-- Double Heads: Rethinking Classification and Localization for Object Detection (2019)
+- **YOLOF**: You Only Look One-level Feature (2021)
+- **YOLOX**: Exceeding YOLO Series in 2021 (2021)
+- **DETR**: End-to-End Object Detection with Transformers (2020)
+- **Deformable DETR**: Deformable Transformers for End-to-End Object Detection (2021)
+- **SparseR-CNN**: End-to-End Object Detection with Learnable Proposals (2020)
+- **VarifocalNet**: An IoU-aware Dense Object Detector (2020)
+- **PAA**: Probabilistic Anchor Assignment with IoU Prediction for Object Detection (2020)
+- **SABL**: Side-Aware Boundary Localization for More Precise Object Detection (2020)
+- **ATSS**: Bridging the Gap Between Anchor-based and Anchor-free Detection via Adaptive Training Sample Selection (2019)
+- **Double Heads**: Rethinking Classification and Localization for Object Detection (2019)
 
 ## YOLOF: You Only Look One-level Feature (2021)
+
+![YOLOF](images/yolof.png)
 
 This paper revisits feature pyramids networks (FPN) for one-stage detectors and points out that the success of FPN is due to its divide-and-conquer solution to the optimization problem in object detection rather than multi-scale feature fusion. From the perspective of optimization, we introduce an alternative way to address the problem instead of adopting the complex feature pyramids - {utilizing only one-level feature for detection}. Based on the simple and efficient solution, we present You Only Look One-level Feature (YOLOF). In our method, two key components, Dilated Encoder and Uniform Matching, are proposed and bring considerable improvements. Extensive experiments on the COCO benchmark prove the effectiveness of the proposed model. Our YOLOF achieves comparable results with its feature pyramids counterpart RetinaNet while being 2.5× faster. Without transformer layers, YOLOF can match the performance of DETR in a single-level feature manner with 7× less training epochs. With an image size of 608×608, YOLOF achieves 44.3 mAP running at 60 fps on 2080Ti, which is 13% faster than YOLOv4.
 
