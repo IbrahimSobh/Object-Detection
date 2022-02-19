@@ -2,8 +2,8 @@
 
 In this tutorial, you will:
 - Perform inference with 10 well-known pre-trained object detectors <a href="http://colab.research.google.com/drive/1AVgdWQ8LTrn6MrGyamKSUT17n_F_cCG2?usp=sharing" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-
 - Fine tune object detectors on a custom dataset <a href="https://colab.research.google.com/drive/1pfMiefP8t2nhb92IHKgYmjfdorHSt2VD?usp=sharing" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+- Design and train your own object detector (to be developed)
 
 
 ## 10 Object detectors
@@ -111,6 +111,11 @@ Results of the fine-tuned model
 
 -----
 
+## Design and train your own object detector
+TBD
+
+-----
+
 ## Quick review
 
 ### YOLOF: You Only Look One-level Feature (2021)
@@ -153,6 +158,3 @@ Object detection has been dominated by anchor-based detectors for several years.
 ![dhs](images/Double Heads.png)
 Two head structures (i.e. fully connected head and convolution head) have been widely used in R-CNN based detectors for classification and localization tasks. However, there is a lack of understanding of how does these two head structures work for these two tasks. To address this issue, we perform a thorough analysis and find an interesting fact that the two head structures have opposite preferences towards the two tasks. Specifically, the fully connected head (fc-head) is more suitable for the classification task, while the convolution head (conv-head) is more suitable for the localization task. Furthermore, we examine the output feature maps of both heads and find that fc-head has more spatial sensitivity than conv-head. Thus, fc-head has more capability to distinguish a complete object from part of an object, but is not robust to regress the whole object. Based upon these findings, we propose a Double-Head method, which has a fully connected head focusing on classification and a convolution head for bounding box regression. Without bells and whistles, our method gains +3.5 and +2.8 AP on MS COCO dataset from Feature Pyramid Network (FPN) baselines with ResNet-50 and ResNet-101 backbones, respectively.
 
-
-## Design and train your own object detector
-TBD
