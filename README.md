@@ -3,7 +3,7 @@
 In this tutorial, you will:
 - Perform inference with 10 well-known pre-trained object detectors <a href="http://colab.research.google.com/drive/1AVgdWQ8LTrn6MrGyamKSUT17n_F_cCG2?usp=sharing" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 - Fine tune object detectors on a custom dataset <a href="https://colab.research.google.com/drive/1pfMiefP8t2nhb92IHKgYmjfdorHSt2VD?usp=sharing" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-- Design and train your own object detector (to be developed)
+- Design and train your own object detector <a href="https://colab.research.google.com/drive/1_yINCuTRs9SYdPXEFTOsxoqQvWbyz1Tq?usp=sharing" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 
 ## 10 Object detectors
@@ -112,7 +112,89 @@ Results of the fine-tuned model
 -----
 
 ## Design and train your own object detector
-TBD
+
+Here, we  desing, inspect and train a custome object detection model. First we start with YOLOF detector and then make the following updates:   
+1. **Backbone**: Replace ResNet50 -> Pyramid Vision Transformer (PVT) 
+
+```
+# clear the defualt backbone
+cfg.model.backbone.clear() 
+# add the new backbone
+cfg.model.backbone.type='PyramidVisionTransformer'
+cfg.model.backbone.num_layers=[2, 2, 2, 2]
+cfg.model.backbone.init_cfg=dict(checkpoint='https://github.com/whai362/PVT/releases/download/v2/pvt_tiny.pth')
+cfg.model.backbone.out_indices=(3, )
+```
+
+2. **Neck**: Replace DilatedEncoder -> Feature Pyramid Network (FPN)
+
+```
+# clear the defualt neck
+cfg.model.neck.clear() 
+
+# add the new neck
+cfg.model.neck.type='FPN'
+cfg.model.neck.in_channels=[512]
+cfg.model.neck.out_channels=128
+cfg.model.neck.num_outs=1
+```
+
+3. **Head**: Update YOLOF head -> num_classes = 3, and input channels 
+
+```
+cfg.model.bbox_head.num_classes=3
+cfg.model.bbox_head.in_channels=128
+```
+
+Train on KITTI tiny
+
+```
+- Epoch [1][10/50]loss_cls: 11.7010, loss_bbox: 1.2835, loss: 12.9846
+- Epoch [1][20/50]loss_cls: 1.5840, loss_bbox: 1.2059, loss: 2.7900
+- Epoch [1][30/50]loss_cls: 1.9305, loss_bbox: 1.1042, loss: 3.0348
+- Epoch [1][40/50]loss_cls: 1.9289, loss_bbox: 1.1813, loss: 3.1102
+- Epoch [1][50/50]loss_cls: 1.5479, loss_bbox: 0.8640, loss: 2.4120
+- Epoch [2][10/50]loss_cls: 1.7256, loss_bbox: 1.1628, loss: 2.8884
+- Epoch [2][20/50]loss_cls: 1.4963, loss_bbox: 1.1485, loss: 2.6448
+- Epoch [2][30/50]loss_cls: 1.5202, loss_bbox: 0.9300, loss: 2.4502
+- Epoch [2][40/50]loss_cls: 1.3903, loss_bbox: 1.2719, loss: 2.6623
+- Epoch [2][50/50]loss_cls: 1.4891, loss_bbox: 1.0604, loss: 2.5496
+- Epoch [3][10/50]loss_cls: 1.2993, loss_bbox: 1.0748, loss: 2.3741
+- Epoch [3][20/50]loss_cls: 1.2108, loss_bbox: 1.0574, loss: 2.2682
+- Epoch [3][30/50]loss_cls: 1.1432, loss_bbox: 1.1037, loss: 2.2469
+- Epoch [3][40/50]loss_cls: 1.0749, loss_bbox: 0.9834, loss: 2.0583
+- Epoch [3][50/50]loss_cls: 1.0111, loss_bbox: 1.0372, loss: 2.0483
+- Epoch [4][10/50]loss_cls: 0.8880, loss_bbox: 1.3213, loss: 2.2093
+- Epoch [4][20/50]loss_cls: 0.9726, loss_bbox: 1.0892, loss: 2.0618
+- Epoch [4][30/50]loss_cls: 0.9695, loss_bbox: 0.7829, loss: 1.7524
+- Epoch [4][40/50]loss_cls: 0.8184, loss_bbox: 1.0882, loss: 1.9067
+- Epoch [4][50/50]loss_cls: 0.8585, loss_bbox: 1.1519, loss: 2.0104
+- Epoch [5][10/50]loss_cls: 0.7565, loss_bbox: 1.0927, loss: 1.8492
+- Epoch [5][20/50]loss_cls: 0.8421, loss_bbox: 0.9804, loss: 1.8226
+- Epoch [5][30/50]loss_cls: 0.7459, loss_bbox: 0.9499, loss: 1.6958
+- Epoch [5][40/50]loss_cls: 0.6630, loss_bbox: 0.9623, loss: 1.6253
+- Epoch [5][50/50]loss_cls: 0.8257, loss_bbox: 1.0594, loss: 1.8851
+- Epoch [6][10/50]loss_cls: 0.7017, loss_bbox: 1.1119, loss: 1.8136
+- Epoch [6][20/50]loss_cls: 0.7116, loss_bbox: 1.0703, loss: 1.7819
+- Epoch [6][30/50]loss_cls: 0.7036, loss_bbox: 1.0633, loss: 1.7669
+- Epoch [6][40/50]loss_cls: 0.6957, loss_bbox: 1.1699, loss: 1.8656
+- Epoch [6][50/50]loss_cls: 0.6945, loss_bbox: 1.0165, loss: 1.7111
+- Epoch [7][10/50]loss_cls: 0.6606, loss_bbox: 0.9504, loss: 1.6110
+- Epoch [7][20/50]loss_cls: 0.6879, loss_bbox: 1.0412, loss: 1.7292
+- Epoch [7][30/50]loss_cls: 0.6921, loss_bbox: 1.2121, loss: 1.9042
+- Epoch [7][40/50]loss_cls: 0.6256, loss_bbox: 0.9307, loss: 1.5562
+- Epoch [7][50/50]loss_cls: 0.6127, loss_bbox: 1.1764, loss: 1.7891
+- Epoch [8][10/50]loss_cls: 0.5272, loss_bbox: 1.1579, loss: 1.6851
+- Epoch [8][20/50]loss_cls: 0.6060, loss_bbox: 0.9147, loss: 1.5207
+- Epoch [8][30/50]loss_cls: 0.6159, loss_bbox: 1.0704, loss: 1.6863
+- Epoch [8][40/50]loss_cls: 0.7068, loss_bbox: 1.0493, loss: 1.7561
+- Epoch [8][50/50]loss_cls: 0.6400, loss_bbox: 0.9694, loss: 1.6094
+- Epoch [9][10/50]loss_cls: 0.6859, loss_bbox: 1.0887, loss: 1.7745
+- Epoch [9][20/50]loss_cls: 0.5328, loss_bbox: 0.7794, loss: 1.3123
+```
+
+See how the loss is decreasing without errors.
+
 
 -----
 
