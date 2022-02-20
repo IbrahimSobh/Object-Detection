@@ -113,6 +113,8 @@ Results of the fine-tuned model
 
 ## Design and train your own object detector
 
+<a href="https://colab.research.google.com/drive/1_yINCuTRs9SYdPXEFTOsxoqQvWbyz1Tq?usp=sharing" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
 Here, we  desing, inspect and train a custome object detection model. First we start with YOLOF detector and then make the following updates:   
 1. **Backbone**: Replace ResNet50 -> Pyramid Vision Transformer (PVT) 
 
