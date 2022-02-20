@@ -105,9 +105,9 @@ While fine-tuning a pretrained model, we should select a small learning rate, mo
 ```
 
 Results of the fine-tuned model
-![od_ft_res01](images/od_ft_res01.png)
 ![od_ft_res02](images/od_ft_res02.png)
 ![od_ft_res03](images/od_ft_res03.png)
+![od_ft_res01](images/od_ft_res01.png)
 
 -----
 
