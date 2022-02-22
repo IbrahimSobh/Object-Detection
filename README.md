@@ -5,6 +5,8 @@ In this tutorial, you will:
 - Fine tune object detectors on a custom dataset <a href="https://colab.research.google.com/drive/1pfMiefP8t2nhb92IHKgYmjfdorHSt2VD?usp=sharing" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 - Design and train your own object detector <a href="https://colab.research.google.com/drive/1_yINCuTRs9SYdPXEFTOsxoqQvWbyz1Tq?usp=sharing" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
+This work is based on [MMDetection](https://github.com/open-mmlab/mmdetection): [OpenMMLab](https://github.com/open-mmlab) detection toolbox and benchmark.
+
 
 ## 10 Object detectors
 
@@ -195,7 +197,7 @@ Train on KITTI tiny
 - Epoch [9][20/50]loss_cls: 0.5328, loss_bbox: 0.7794, loss: 1.3123
 ```
 
-See how the loss is decreasing without errors.
+See how the loss is decreasing.
 
 
 -----
