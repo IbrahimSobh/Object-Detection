@@ -29,7 +29,7 @@ This work is based on [MMDetection](https://github.com/open-mmlab/mmdetection): 
 
 <a href="http://colab.research.google.com/drive/1AVgdWQ8LTrn6MrGyamKSUT17n_F_cCG2?usp=sharing" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-Here is how to load a pretrained model, perfrom inference and vizualza the results.
+Here is how to load a pretrained model, perfrom inference and vizualize the results.
 
 ```
 model = init_detector(config, checkpoint, device='cuda:0')
